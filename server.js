@@ -5,38 +5,38 @@ const server = fastify();
 
 const database = new DatabaseMemory()
 
-server.get('/alunos', () => {
+server.get('/gocoffee', () => {
     return database.list()
 })
 
-server.post('/alunos', (req, res) => {
-    const { nome, idade, matriculado, time } = req.body
+server.post('/gocoffee', (req, res) => {
+    const { nome, aniverssario, cpf, cafepreferido } = req.body
 
     database.create({
         nome,
-        idade,
-        matriculado,
-        time
+        aniverssario,
+        cpf,
+        cafepreferido
     })
 
     return res.status(201).send()
 })
 
-server.put('/alunos/:id', (req, res) => {
+server.put('/gocoffee/:id', (req, res) => {
    const id = req.params.id
-   const { nome, idade, matriculado, time } = req.body
+   const { nome, aniverssario, cpf, cafepreferido } = req.body
 
    database.update(id, {
-       nome,
-       idade,
-       matriculado,
-       time
+        nome,
+        aniverssario,
+        cpf,
+        cafepreferido
    })
 
    res.status(204).send()
 })
 
-server.delete('/alunos/:id', (req, res) => {
+server.delete('/gocoffee/:id', (req, res) => {
     const id = req.params.id
     database.delete(id)
     return res.status(200).send()
