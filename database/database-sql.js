@@ -12,7 +12,7 @@ export class DatabaseSql {
 
         const { nome, aniversario, cpf, cafepreferido} = cliente
 
-        await db.query`insert into alunos values (
+        await db.query`insert into clientes values (
             ${clienteId}, ${nome}, ${aniversario}, ${cpf}, ${cafepreferido}
         )`
     }
@@ -21,11 +21,11 @@ export class DatabaseSql {
         const { nome, aniversario, cpf, cafepreferido} = cliente
 
         await db.query`update clientes
-            set name = '${nome}', age = ${idade}, registered = ${Number(matriculado)}, team = '${time}'
+            set nome = '${nome}', aniversario = '${aniversario}', cpf = '${cpf}', cafe_preferido = '${cafepreferido}'
             where id = '${id}'`
     }
 
     async delete(id) {
-        await db.query`delete from alunos where id = ${id}`
+        await db.query`delete from clientes where id = ${id}`
     }
 }

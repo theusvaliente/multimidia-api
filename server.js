@@ -1,6 +1,7 @@
 import { fastify } from "fastify";
 import cors from '@fastify/cors'
 import { DatabaseMemory } from "./database/database-memory.js";
+import { DatabaseSql } from "./database/database-sql.js";
 
 const server = fastify();
 
@@ -9,20 +10,20 @@ await server.register(cors,{
     methods: ['GET']
 })
 
-const database = new DatabaseMemory()
+const database = new DatabaseSql()
 
 server.get('/gocoffee', () => {
     return database.list()
 })
 
 server.post('/gocoffee', (req, res) => {
-    const { nome, aniverssario, cpf, cafepreferido } = req.body
+    const { nome, aniversario, cpf, cafepreferido } = req.body
 
     database.create({
         nome,
-        aniverssario,
+        aniversario,
         cpf,
-        cafepreferido
+        cafe_preferido
     })
 
     return res.status(201).send()
@@ -36,7 +37,7 @@ server.put('/gocoffee/:id', (req, res) => {
         nome,
         aniverssario,
         cpf,
-        cafepreferido
+        cafe_preferido
    })
 
    res.status(204).send()
